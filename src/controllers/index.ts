@@ -1,5 +1,2 @@
-import authCtrl from './auth.controller';
-import userCtrl from './user.controller';
-
-export const authController = authCtrl;
-export const userController = userCtrl;
+export * as authController from './auth.controller';
+export * as userController from './user.controller';

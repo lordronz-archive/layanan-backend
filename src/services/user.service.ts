@@ -6,14 +6,14 @@ import { User } from '../models';
 import { QueryOption } from '../models/plugins/paginate.plugin';
 import ApiError from '../utils/ApiError';
 
-const createUser = async (userBody: UserInterface) => {
+export const createUser = async (userBody: UserInterface) => {
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
   return User.create(userBody);
 };
 
-const queryUsers = async (
+export const queryUsers = async (
   filter: FilterQuery<unknown>,
   options: QueryOption
 ) => {
@@ -21,15 +21,15 @@ const queryUsers = async (
   return users;
 };
 
-const getUserById = async (id: string) => {
+export const getUserById = async (id: string) => {
   return User.findById(id);
 };
 
-const getUserByEmail = async (email: string) => {
+export const getUserByEmail = async (email: string) => {
   return User.findOne({ email });
 };
 
-const updateUserById = async (
+export const updateUserById = async (
   userId: string,
   updateBody: Partial<UserInterface>
 ) => {
@@ -45,7 +45,7 @@ const updateUserById = async (
   return user;
 };
 
-const deleteUserById = async (userId: string) => {
+export const deleteUserById = async (userId: string) => {
   const user = await getUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');

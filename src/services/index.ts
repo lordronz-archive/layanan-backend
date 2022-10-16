@@ -1,9 +1,4 @@
-import authSvc from './auth.service';
-import emailSvc from './email.service';
-import tokenSvc from './token.service';
-import userSvc from './user.service';
-
-export const authService = authSvc;
-export const emailService = emailSvc;
-export const tokenService = tokenSvc;
-export const userService = userSvc;
+export * as authService from './auth.service';
+export * as emailService from './email.service';
+export * as tokenService from './token.service';
+export * as userService from './user.service';

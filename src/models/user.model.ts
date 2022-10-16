@@ -70,8 +70,8 @@ const userSchema = new Schema<UserInterface, UserModel, UserMethods>(
 );
 
 // add plugin that converts mongoose to json
-userSchema.plugin(toJSON as (schema: Schema) => void);
-userSchema.plugin(paginate);
+userSchema.plugin(toJSON as never);
+userSchema.plugin(paginate as never);
 
 userSchema.statics.isEmailTaken = async function (
   email: string,
@@ -94,6 +94,6 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-const User = model<UserInterface, UserModel>('User', userSchema);
+export const User = model<UserInterface, UserModel>('User', userSchema);
 
 export default User;

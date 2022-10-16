@@ -6,7 +6,7 @@ import ApiError from '../utils/ApiError';
 import tokenService from './token.service';
 import userService from './user.service';
 
-const loginUserWithEmailAndPassword = async (
+export const loginUserWithEmailAndPassword = async (
   email: string,
   password: string
 ) => {
@@ -17,7 +17,7 @@ const loginUserWithEmailAndPassword = async (
   return user;
 };
 
-const logout = async (refreshToken: string) => {
+export const logout = async (refreshToken: string) => {
   const refreshTokenDoc = await Token.findOne({
     token: refreshToken,
     type: tokenTypes.REFRESH,
@@ -29,7 +29,7 @@ const logout = async (refreshToken: string) => {
   await refreshTokenDoc.remove();
 };
 
-const refreshAuth = async (refreshToken: string) => {
+export const refreshAuth = async (refreshToken: string) => {
   try {
     const refreshTokenDoc = await tokenService.verifyToken(
       refreshToken,
@@ -48,7 +48,7 @@ const refreshAuth = async (refreshToken: string) => {
   }
 };
 
-const resetPassword = async (
+export const resetPassword = async (
   resetPasswordToken: string,
   newPassword: string
 ) => {
@@ -70,7 +70,7 @@ const resetPassword = async (
   }
 };
 
-const verifyEmail = async (verifyEmailToken: string) => {
+export const verifyEmail = async (verifyEmailToken: string) => {
   try {
     const verifyEmailTokenDoc = await tokenService.verifyToken(
       verifyEmailToken,
