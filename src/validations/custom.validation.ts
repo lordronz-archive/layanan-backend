@@ -10,15 +10,15 @@ export const objectId = (value: string, helpers: CustomHelpers) => {
 };
 
 export const password = (value: string, helpers: CustomHelpers) => {
-  if (value.length < 8) {
+  if (value.length < 4) {
     return helpers.message(
-      'password must be at least 8 characters' as unknown as LanguageMessages
+      'password must be at least 4 characters' as unknown as LanguageMessages
     );
   }
-  if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-    return helpers.message(
-      'password must contain at least 1 letter and 1 number' as unknown as LanguageMessages
-    );
-  }
+  // if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+  //   return helpers.message(
+  //     'password must contain at least 1 letter and 1 number' as unknown as LanguageMessages
+  //   );
+  // }
   return value;
 };

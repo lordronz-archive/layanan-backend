@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import bcrypt from 'bcryptjs';
-import { FilterQuery, Model, model, Schema } from 'mongoose';
+import mongoose, { FilterQuery, Model, model, Schema } from 'mongoose';
 import validator from 'validator';
 
 import { roles } from '../config/roles';
@@ -44,14 +44,7 @@ const userSchema = new Schema<UserInterface, UserModel, UserMethods>(
       type: String,
       required: true,
       trim: true,
-      minlength: 8,
-      validate(value: string) {
-        if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-          throw new Error(
-            'Password must contain at least one letter and one number'
-          );
-        }
-      },
+      minlength: 4,
       private: true, // used by the toJSON plugin
     },
     role: {
@@ -77,7 +70,10 @@ userSchema.statics.isEmailTaken = async function (
   email: string,
   excludeUserId?: string
 ) {
-  const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
+  const user = await this.findOne({
+    email,
+    _id: mongoose.trusted({ $ne: excludeUserId }),
+  });
   return !!user;
 };
 
