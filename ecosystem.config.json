@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "validin-backend",
+      "name": "express-backend",
       "script": "dist/index.js",
       "instances": 0,
       "autorestart": true,
